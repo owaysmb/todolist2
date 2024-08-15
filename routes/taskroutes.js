@@ -2,30 +2,24 @@ const express = require("express");
 const router = express.Router();
 const task = require("../models/task");
 const app = express()
-var bodyParser = require('body-parser')
-
+var bodyparser = require('body-parser')
+router.use(bodyparser.json())
 
 router.get("/task", async (req, res) => {
   res.sendFile('newfrontendtodo/newtodo.html', {root: __dirname })
-  
-  try {
-    const tasks = await task.find();
-    res.status(200).json(tasks);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
 });
+router.get('/tasks', function (req, res) {
+  task.find({}).then(function (data) {
+    console.log(data);
+    res.send(data)
+  })
+})
 
-
-router.post("/task", async (req, res) => {
-  try {
-    const receiceddata = req.body
-    const newtask = new task(receiceddata);
-    await newtask.save()
-    res.status(200).json( {receiceddata});
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+router.post("/task", (req, res) => {
+  console.log(req.body);
+  new task(req.body).save().then(function (s) {
+    res.send(req.body)
+  })
 });
 
 router.put("/task/:id", async (req, res) => {
@@ -55,4 +49,3 @@ router.delete("/task/:id", async (req,res)=>{
 
 
 module.exports = router;
-

@@ -37,32 +37,9 @@
         <div id="delete">Delete</div>
       </div>
     </form>
+    <script src="./app.js" charset="utf-8"></script>
     <script>
-      let addtask = document.getElementById("add");
-      let deletetask = document.getElementById("delete");
-      let inp = document.getElementById("input");
-      const url = "/task";
 
-      addtask.addEventListener("click", addinfo);
-      async function addinfo(e) {
-        e.preventDefault();
-        const res = await fetch(url, {
-          method: "POST",
-          mode: "no-cors", 
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(),
-        }).then(async function (res) {
-          const data = await res.json();
-          const convertdata = JSON.stringify(inp.value);
-          console.log(convertdata);
-          document.body.innerHTML += `<h1>${inp.value}</h1>`;
-          inp.value = "";
-          console.log(res);
-          return res.title
-        });
-      }
     </script>
   </body>
 </html>

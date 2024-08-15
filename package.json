@@ -2,7 +2,19 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
-    "mongoose": "^8.5.3",
+    "mongoose": "^8.5.3"
+  },
+  "name": "todolist2",
+  "version": "1.0.0",
+  "main": "newtodo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon newtodo.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
     "nodemon": "^3.1.4"
   }
 }
