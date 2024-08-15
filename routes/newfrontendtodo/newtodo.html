@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      #todolist {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        height: 200px;
+      }
+      #add,
+      #delete {
+        padding: 10px;
+        background-color: black;
+        color: #03ff03;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        height: 20px;
+      }
+      #input {
+        width: 500px;
+        border-radius: 10px;
+        height: 35px;
+      }
+    </style>
+    <form action="/task" method="POST">
+      <div id="todolist">
+        <input type="text" id="input" name="title" required />
+        <div id="add">Add</div>
+        <div id="delete">Delete</div>
+      </div>
+    </form>
+    <script>
+      let addtask = document.getElementById("add");
+      let deletetask = document.getElementById("delete");
+      let inp = document.getElementById("input");
+      const url = "/task";
+
+      addtask.addEventListener("click", addinfo);
+      async function addinfo(e) {
+        e.preventDefault();
+        const res = await fetch(url, {
+          method: "POST",
+          mode: "no-cors", 
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(),
+        }).then(async function (res) {
+          const data = await res.json();
+          const convertdata = JSON.stringify(inp.value);
+          console.log(convertdata);
+          document.body.innerHTML += `<h1>${inp.value}</h1>`;
+          inp.value = "";
+          console.log(res);
+          return res.title
+        });
+      }
+    </script>
+  </body>
+</html>
